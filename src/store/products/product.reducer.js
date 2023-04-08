@@ -30,6 +30,12 @@ export const productsReducer = (
       return { ...state, sortedProds: payload, isSorted: true };
     case PRODUCTS_ACTION_TYPES.UNSORT_PRODUCTS:
       return { ...state, products: payload, isSorted: false };
+    case PRODUCTS_ACTION_TYPES.EDIT_PRODUCTS:
+      return {
+        ...state,
+        products: payload.products,
+        sortedProds: payload.sortedProds,
+      };
     default:
       return state;
   }

@@ -39,3 +39,30 @@ export const sortProduct = (sortedProducts) => {
 export const unsortProduct = (products) => {
   return createAction(PRODUCTS_ACTION_TYPES.UNSORT_PRODUCTS, products);
 };
+
+export const saveEditProduct = (products, productToEdit, newValues) => {
+  const { title, price, description, rating } = newValues;
+
+  const productIndex = products.data.findIndex(
+    (product) => product.id === productToEdit.id
+  );
+
+  const newProduct = {
+    ...products.data[productIndex],
+    title: title,
+    price: Number(price),
+    description: description,
+    rating: Number(rating),
+  };
+
+  products.data[productIndex] = newProduct;
+
+  const newProducts = { ...products };
+  console.log(newProducts);
+  const sortedProds = JSON.parse(JSON.stringify(newProducts));
+
+  return createAction(PRODUCTS_ACTION_TYPES.EDIT_PRODUCTS, {
+    products: newProducts,
+    sortedProds: sortedProds,
+  });
+};
