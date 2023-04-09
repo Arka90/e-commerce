@@ -36,6 +36,18 @@ export const productsReducer = (
         products: payload.products,
         sortedProds: payload.sortedProds,
       };
+    case PRODUCTS_ACTION_TYPES.DELETE_PRODUCT:
+      return {
+        ...state,
+        products: payload.products,
+        sortedProds: payload.sortedProds,
+      };
+    case PRODUCTS_ACTION_TYPES.ADD_PRODUCT:
+      return {
+        ...state,
+        products: payload.products,
+        sortedProds: payload.sortedProds,
+      };
     default:
       return state;
   }

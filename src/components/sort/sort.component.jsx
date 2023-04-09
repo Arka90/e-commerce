@@ -1,5 +1,8 @@
-import React from "react";
+// import React from "react";
 import "./sort.styles.scss";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProductsArray } from "../../store/products/product.selector";
 import { selectIsSorted } from "../../store/products/product.selector";
@@ -19,14 +22,28 @@ function Sort() {
   const handelSort = () => {
     if (!isSorted) {
       dispatch(sortProduct(sortedProds));
+      toast("Products Sorted!");
     } else {
       dispatch(unsortProduct(products));
+      toast("Products Unsorted!");
     }
   };
 
   return (
     <div onClick={handelSort} className="sort-btn">
       {isSorted ? <p>X Sort by price</p> : <p>Sort by price</p>}
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }

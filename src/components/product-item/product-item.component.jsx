@@ -1,11 +1,16 @@
 import "./product-item.styles.scss";
 
 import ReactStars from "react-stars";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector";
 import { selectProductsArray } from "../../store/products/product.selector";
-import { saveEditProduct } from "../../store/products/product.action";
+import {
+  saveEditProduct,
+  deleteProduct,
+} from "../../store/products/product.action";
 import { addItemToCart } from "../../store/cart/cart.action";
 
 function ProductItem({ product }) {
@@ -38,7 +43,10 @@ function ProductItem({ product }) {
   const cartItems = useSelector(selectCartItems);
   const products = useSelector(selectProductsArray);
 
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
+  const addProductToCart = () => {
+    dispatch(addItemToCart(cartItems, product));
+    toast("Product Added to cart!");
+  };
 
   const handelSave = () => {
     const newValues = {
@@ -49,13 +57,19 @@ function ProductItem({ product }) {
     };
 
     dispatch(saveEditProduct(products, product, newValues));
+    toast("Product Updated");
     setBeingEdited(false);
+  };
+
+  const handelDelete = () => {
+    dispatch(deleteProduct(products, product));
+    toast("Product Deleted");
   };
 
   return (
     <div className="product-card">
       <div className="image-price-rating-container">
-        <img src={images[2]} alt={title} />
+        <img src={images[0]} alt={title} />
 
         <div className="title-rating-price">
           <div className="title-container">
@@ -136,7 +150,7 @@ function ProductItem({ product }) {
                   alt="edit"
                 />
               </div>
-              <div className="action-icon">
+              <div className="action-icon" onClick={handelDelete}>
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/1632/1632602.png"
                   alt="delete"
@@ -152,6 +166,18 @@ function ProductItem({ product }) {
           )}
         </div>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }

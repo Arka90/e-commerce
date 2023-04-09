@@ -58,7 +58,34 @@ export const saveEditProduct = (products, productToEdit, newValues) => {
   products.data[productIndex] = newProduct;
 
   const newProducts = { ...products };
-  console.log(newProducts);
+
+  const sortedProds = JSON.parse(JSON.stringify(newProducts));
+
+  return createAction(PRODUCTS_ACTION_TYPES.EDIT_PRODUCTS, {
+    products: newProducts,
+    sortedProds: sortedProds,
+  });
+};
+
+export const deleteProduct = (products, productToDelete) => {
+  const newProductsArray = products.data.filter((product) => {
+    return product.id !== productToDelete.id;
+  });
+
+  const newProducts = { ...products.data, data: newProductsArray };
+  const sortedProds = JSON.parse(JSON.stringify(newProducts));
+
+  return createAction(PRODUCTS_ACTION_TYPES.DELETE_PRODUCT, {
+    products: newProducts,
+    sortedProds: sortedProds,
+  });
+};
+
+export const addProduct = (products, productToAdd) => {
+  products.data.push(productToAdd);
+
+  const newProducts = { ...products };
+
   const sortedProds = JSON.parse(JSON.stringify(newProducts));
 
   return createAction(PRODUCTS_ACTION_TYPES.EDIT_PRODUCTS, {
