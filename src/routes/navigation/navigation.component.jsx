@@ -11,7 +11,7 @@ function Navigation() {
       <div className="navBar">
         <div className="sectionOne">
           <Link className="navLinks" to="allProds">
-            <Logo />
+            <h2 className="logo">EcomExpress</h2>
           </Link>
           <Link className="navLinks" to="allProds">
             Products
@@ -26,7 +26,14 @@ function Navigation() {
             <CartIcon />
           </Link>
 
-          <div className="navItem">Arka</div>
+          <div className="navItem">
+            <img
+              className="avatar"
+              src="https://cdn-icons-png.flaticon.com/512/547/547420.png"
+              alt=""
+            />
+            <p className="name">Arka</p>
+          </div>
         </div>
       </div>
       <Outlet />

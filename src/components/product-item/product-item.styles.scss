@@ -5,6 +5,8 @@
   padding: 8px;
   margin-bottom: 20px;
   background-color: #efefef;
+  cursor: pointer;
+  position: relative;
   .image-price-rating-container {
     display: flex;
     align-items: center;
@@ -33,6 +35,9 @@
     .action-container {
       display: flex;
       margin-top: 15px;
+      position: absolute;
+      bottom: 15px;
+      right: 5px;
       .action-icon {
         img {
           width: 25px;

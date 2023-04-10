@@ -1,12 +1,13 @@
 import "./product-item.styles.scss";
 
 import ReactStars from "react-stars";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector";
 import { selectProductsArray } from "../../store/products/product.selector";
+import { useNavigate } from "react-router-dom";
 import {
   saveEditProduct,
   deleteProduct,
@@ -14,7 +15,7 @@ import {
 import { addItemToCart } from "../../store/cart/cart.action";
 
 function ProductItem({ product }) {
-  const { title, price, images, rating, description } = product;
+  const { title, price, images, rating, description, id } = product;
 
   //For Edit Cart Item
   const [beingEdited, setBeingEdited] = useState(false);
@@ -66,9 +67,15 @@ function ProductItem({ product }) {
     toast("Product Deleted");
   };
 
+  const navigate = useNavigate();
+
+  const handelShowDetails = () => {
+    navigate(`/product/${id}`);
+  };
+
   return (
     <div className="product-card">
-      <div className="image-price-rating-container">
+      <div onClick={handelShowDetails} className="image-price-rating-container">
         <img src={images[0]} alt={title} />
 
         <div className="title-rating-price">
@@ -126,6 +133,13 @@ function ProductItem({ product }) {
         <div>
           {beingEdited ? (
             <div className="action-container">
+              <div className="action-icon" onClick={handelSave}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
+                  alt="save"
+                />
+              </div>
+
               <div
                 className="action-icon"
                 onClick={() => setBeingEdited(false)}
@@ -133,12 +147,6 @@ function ProductItem({ product }) {
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/391/391247.png"
                   alt="cancel"
-                />
-              </div>
-              <div className="action-icon" onClick={handelSave}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
-                  alt="save"
                 />
               </div>
             </div>
@@ -166,18 +174,6 @@ function ProductItem({ product }) {
           )}
         </div>
       </div>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 }

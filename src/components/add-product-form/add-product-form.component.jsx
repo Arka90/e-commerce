@@ -4,6 +4,7 @@ import { useState } from "react";
 import { addProduct } from "../../store/products/product.action";
 import { selectProductsArray } from "../../store/products/product.selector";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 function AddProductForm() {
@@ -29,12 +30,13 @@ function AddProductForm() {
     };
 
     dispatch(addProduct(products, newProduct));
-
+    toast("Product Added TO db");
     navigate("/allProds");
   };
 
   return (
     <div className="form-container">
+      <div className="add_prod_title">Add Product</div>
       <input
         type="text"
         placeholder="Title"

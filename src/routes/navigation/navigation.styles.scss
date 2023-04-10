@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px;
+  padding: 20px;
+  padding-right: 60px;
   background-color: #ff9900;
   color: #232f3e;
 
@@ -12,13 +13,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 18%;
+    width: 25%;
   }
   .sectionTwo {
     width: 7%;
     margin-right: 20px;
   }
-
+  .logo {
+    font-family: cursive;
+  }
   .navLinks {
     cursor: pointer;
     text-decoration: none;
@@ -27,5 +30,13 @@
   .navItem {
     font-size: 18px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .avatar {
+      width: 40px;
+      margin-left: 30px;
+      margin-right: 8px;
+    }
   }
 }

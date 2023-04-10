@@ -7,6 +7,7 @@ import {
   incQuantity,
   decQuantity,
 } from "../../store/cart/cart.action";
+import { toast } from "react-toastify";
 
 function CartItem({ cartItem }) {
   const { name, images, price, quantity } = cartItem;
@@ -16,14 +17,17 @@ function CartItem({ cartItem }) {
 
   const handelDelete = () => {
     dispatch(removeItemFromCart(cartItems, cartItem));
+    toast("Item Removed!");
   };
 
   const handelIncrease = () => {
     dispatch(incQuantity(cartItems, cartItem));
+    toast("Item Added!");
   };
 
   const handelDecrease = () => {
     dispatch(decQuantity(cartItems, cartItem));
+    toast("Item Removed!");
   };
 
   return (
