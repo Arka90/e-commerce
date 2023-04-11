@@ -75,8 +75,8 @@ function ProductItem({ product }) {
 
   return (
     <div className="product-card">
-      <div onClick={handelShowDetails} className="image-price-rating-container">
-        <img src={images[0]} alt={title} />
+      <div className="image-price-rating-container">
+        <img onClick={handelShowDetails} src={images[0]} alt={title} />
 
         <div className="title-rating-price">
           <div className="title-container">
